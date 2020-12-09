@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import CheckBox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
+import CoolButton from './CoolButton'; 
 
 
 
@@ -28,8 +28,20 @@ const CheckExample = ({label}) => {
   )
 }
 
+const useStyles = makeStyles({
+  buttonStyle:{
+    marginTop: 20,
+    borderRadius: 0,
+    backgroundColor: "green",
+    color: "white",
+  }
+});
+
 function App() {
+  let [cool, setCool] = useState(true);
+  const classes = useStyles();  
   return (
+    
     <div className="App">
       <header className="App-header">
         <Box variant="contained" >
@@ -38,15 +50,25 @@ function App() {
         </Box>
         
         <Button
+          onClick={() => setCool(!cool)}
           startIcon = {<SaveIcon/>}
           endIcon = {<SaveIcon/>}  
           variant="contained" 
           color="secondary"
           style={{fontSize: '20px'}} 
           size="large">
-          Hello World
+          Change coolButton
         </Button>
-        <img src={logo} className="App-logo" alt="logo" />        
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.buttonStyle}
+        >
+          Hello World Again!
+        </Button>
+        
+        <CoolButton color={cool} />
+       
       </header>
     </div>
   );
